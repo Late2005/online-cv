@@ -1,0 +1,517 @@
+    :root {
+        --primary: #00c6ff;
+        --secondary: #0072ff;
+        --text-light: #f1f1f1;
+        --text-muted: #b0b0b0;
+        --bg-dark: #121212;
+        --bg-panel: #1e1e1e;
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Oswald', sans-serif;
+        color: var(--primary);
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+/* Keep your existing styles */
+a, .btn-link {
+  color: var(--primary);
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden; /* needed for shine effect */
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  border: none;
+  transition: transform 0.2s ease-in-out;
+  animation: pulse 2.5s infinite; /* add pulsing */
+}
+
+/* Shine effect */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+}
+
+.btn-primary:hover::before {
+  animation: shine 0.75s forwards;
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+/* Subtle pulsing effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0.5);
+  }
+  70% {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px 5px rgba(var(--bs-primary-rgb), 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0);
+  }
+}
+
+/* Optional: stronger hover feedback */
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 2rem;
+        background: rgba(18, 18, 18, 0.6);
+        backdrop-filter: blur(10px);
+        transition: opacity 0.5s ease, background-color 0.5s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header img.pasfoto {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+    header.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    #intro {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(to bottom, rgba(0, 198, 255, 0.15) 0%, transparent 50%), var(--bg-dark);
+    }
+
+    .intro-content {
+        max-width: 1340px;
+    }
+
+    .intro-content h1 {
+        font-size: 5rem;
+        margin-bottom: 4vh;
+    }
+
+    .intro-content p {
+        padding: 0 10rem;
+    }
+
+    table {
+        color: var(--text-light) !important;
+        font-size: smaller;
+    }
+
+    footer {
+        background-color: #1a1a1a;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    #main {
+        max-width: 1340px;
+    }
+
+    #timeline {
+        position: relative;
+        padding: 5rem 1rem;
+    }
+
+    .timeline-line {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .timeline-entry {
+        position: relative;
+        margin-bottom: 3rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+    }
+
+    .timeline-entry.aos-animate {
+        opacity: 1;
+    }
+
+    .timeline-entry::after {
+        content: '';
+        display: block;
+        height: 1.5rem;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border-radius: 50%;
+        z-index: 10;
+        box-shadow: 0 0 12px rgba(0, 198, 255, 0.7);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 198, 255, 0.6);
+        }
+
+        70% {
+            box-shadow: 0 0 0 10px rgba(0, 198, 255, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 198, 255, 0);
+        }
+    }
+
+    .timeline-content {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        background-color: var(--bg-panel);
+        color: var(--text-light);
+        box-shadow: 0 2px 6px rgba(0, 198, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 5px;
+    }
+
+    .timeline-entry.left .timeline-content {
+        margin-left: calc(50% + 20px);
+    }
+
+    .timeline-entry.right .timeline-content {
+        margin-right: calc(50% + 20px);
+        margin-left: auto;
+    }
+
+    .timeline-entry time {
+        font-weight: bold;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 767.98px) {
+        .intro-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-content p {
+            padding: 0;
+        }
+
+        .timeline-line {
+            left: 0px;
+        }
+
+        .timeline-dot {
+            left: -25px;
+            transform: translateX(0);
+        }
+
+        .timeline-entry {
+            margin-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .timeline-content {
+            padding: 0.75rem;
+        }
+
+        .timeline-entry.left .timeline-content,
+        .timeline-entry.right .timeline-content {
+            margin: 0px;
+            max-width: 100%;
+        }
+    }
+
+    .scroll-indicator {
+        text-align: center;
+        margin-top: -2rem;
+        margin-bottom: 2rem;
+    }
+
+    .scroll-indicator span {
+        display: inline-block;
+        animation: bounce 1.2s infinite;
+        color: var(--primary);
+        font-size: 2rem;
+    }
+
+    @keyframes bounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(8px);
+        }
+    }
+
+    #faq.bg-light {
+        background-color: var(--bg-dark) !important;
+    }
+
+    #faq .card {
+        background-color: var(--bg-panel);
+        color: var(--text-light);
+        border: none;
+        margin-bottom: 1rem;
+    }
+
+    #faq .card-header {
+        background-color: var(--bg-panel);
+        border-bottom: 1px solid #333;
+    }
+
+    #faq .btn-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #faq .card-body {
+        color: var(--text-light);
+    }
+
+/* =========================
+   PRINT (portrait + no bad breaks)
+   ========================= */
+@page {
+  size: letter portrait;             /* force portrait */
+  margin: 10mm;                        /* sensible print margins */
+}
+
+@media print {
+
+  /* Force light color scheme for print */
+  :root,
+  [data-bs-theme="dark"] {
+    color-scheme: light !important;
+  }
+
+  /* Global reset */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;               /* remove invert/blur/etc */
+    animation: none !important;            /* stop all animations */
+    transition: none !important;           /* stop transitions */
+  }
+
+  html, body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+    line-height: 1.5;
+    orphans: 3;                            /* avoid lonely lines */
+    widows: 3;
+  }
+
+  /* Don’t print UI-only elements */
+  header, footer, .btn, nav, .scroll-indicator,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Make collapsed content visible */
+  .collapse {
+    display: block !important;
+    height: auto !important;
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+
+  /* ---- AOS: force all not-yet-scrolled items visible on print ---- */
+  [data-aos],
+  .aos-init,
+  .aos-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+  /* In case the container clips transforms */
+  #timeline, #timeline * {
+    overflow: visible !important;
+  }
+
+  /* Dark theme utilities -> neutral for print */
+  .bg-dark,
+  .text-light,
+  .table-dark,
+  .accordion-item,
+  .accordion-button,
+  .accordion-body {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+  }
+
+  /* Decorative chevrons off */
+  .accordion-button::after {
+    content: none !important;
+    background-image: none !important;
+    filter: none !important;
+  }
+
+  /* Sections: spacing + keep blocks together */
+  section, .container, .row, .col, .card, .timeline-entry, .timeline-content {
+    break-inside: avoid !important;        /* modern */
+    page-break-inside: avoid !important;   /* legacy */
+  }
+
+  /* Avoid breaks immediately before/after headings */
+  h1, h2, h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    margin-top: 0;
+  }
+  h4, h5, h6 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    margin-top: 0.25rem;
+  }
+
+  /* Keep timeline visuals minimal on paper */
+  .timeline-line, .timeline-dot,
+  img.pasfoto {
+    display: none !important;
+  }
+
+  /* Tables: readable borders + keep rows together where possible */
+  table { 
+    width: 100% !important;
+    border-collapse: collapse !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  thead {
+    display: table-header-group !important; /* repeat headers on new pages */
+  }
+  tfoot {
+    display: table-footer-group !important;
+  }
+  th, td {
+    border: 1px solid #000 !important;     /* remove if you prefer borderless */
+    padding: 6pt 8pt !important;
+    vertical-align: top !important;
+  }
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Section-specific neutralization */
+  #intro, #timeline, #faq {
+    padding: 1.25rem 0 !important;
+    background: transparent !important;
+  }
+
+    /* Make Bootstrap containers full-width on paper */
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl,
+    .container-xxl {
+    max-width: none !important;   /* remove fixed widths (540px/720px/… ) */
+    width: 100% !important;       /* stretch to page width */
+    margin-left: 0 !important;    /* remove centering margins */
+    margin-right: 0 !important;
+    padding-left: 0 !important;   /* remove inner padding */
+    padding-right: 0 !important;
+    }
+
+    /* Kill horizontal gutters so rows/cols don’t squeeze content */
+    .row {
+    --bs-gutter-x: 0 !important;
+    --bs-gutter-y: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    }
+
+    /* Remove column padding too (so tables/blocks can use full width) */
+    .col,
+    [class^="col-"],
+    [class*=" col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    }
+
+  /* Links as plain text (optional)
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-weight: normal;
+    color: #000;
+  } */
+}
+
+/* Optional helpers */
+.print-break-before { break-before: page; page-break-before: always; }
+.print-keep { break-inside: avoid; page-break-inside: avoid; }
+
+
